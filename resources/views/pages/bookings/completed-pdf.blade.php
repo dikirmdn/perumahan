@@ -52,8 +52,8 @@
             <tr>
                 <td>{{ $index + 1 }}</td>
                 <td>{{ $booking->house->name ?? 'Data tidak tersedia' }}</td>
-                <td>{{ $booking->phone_number ?? 'Data tidak tersedia' }}</td>
                 <td>{{ $booking->user->name ?? 'Data tidak tersedia' }}</td>
+                <td>{{ $booking->phone_number ?? 'Data tidak tersedia' }}</td>
                 <td>{{ $booking->booking_date->format('d-m-Y') }}</td>
                 <td>{{ $booking->payment_status_text }}</td>
             </tr>

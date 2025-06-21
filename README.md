@@ -9,6 +9,7 @@ Website Booking Rumah adalah aplikasi web yang dibangun menggunakan [Laravel](ht
 -   📝 Sistem pemesanan rumah online
 -   👥 Autentikasi pengguna (register, login, logout)
 -   🧑‍💼 Panel admin untuk mengelola data rumah dan pemesanan
+-   📋 Download laporan ke PDF
 
 ## 🛠️ Teknologi yang Digunakan
 
@@ -18,7 +19,7 @@ Website Booking Rumah adalah aplikasi web yang dibangun menggunakan [Laravel](ht
 | Tailwind CSS               | Framework utility-first CSS    |
 | MySQL                      | Basis data relasional          |
 | Blade                      | Template engine Laravel        |
-| Laravel Breeze / Jetstream | Autentikasi pengguna (pilihan) |
+| Laravel Breeze             | Autentikasi pengguna           |
 
 ## 📦 Instalasi
 
@@ -38,4 +39,24 @@ Install dependensi backend dan frontend dengan perintah berikut:
 ```bash
 composer install
 npm install
+```
+### 3. Copy .env.example to .env and configure db connection
+
+```bash
+cp .env.example .env
+```
+### 4. Generate application key
+
+```bash
+php artisan key:generate
+```
+### 5. Migrate db
+```bash
+php artisan migrate --seed
+```
+
+### 6. Run the server
+```bash
+php artisan serve
+npm run dev
 ```

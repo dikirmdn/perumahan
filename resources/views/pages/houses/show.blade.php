@@ -36,31 +36,37 @@
             <!-- Main Content -->
             <div class="lg:col-span-2">
                 <!-- Image Gallery -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8" x-data="{ 
+                    images: {{ json_encode(collect($house->images)->map(fn($img) => Storage::url($img))) }},
+                    currentIndex: 0,
+                    get currentImage() { return this.images.length > 0 ? this.images[this.currentIndex] : '' }
+                }">
                     <div class="relative">
                         @if($house->images && count($house->images) > 0)
                             <div class="relative h-96">
-                                <img src="{{ Storage::url($house->images[0]) }}" 
+                                <img :src="currentImage" 
                                      alt="{{ $house->name }}" 
                                      class="w-full h-full object-cover">
                                 @if(count($house->images) > 1)
                                 <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                                    @foreach($house->images as $index => $image)
-                                    <button class="w-3 h-3 rounded-full bg-white bg-opacity-75 hover:bg-opacity-100 transition duration-300"
-                                            onclick="showImage({{ $index }})"></button>
-                                    @endforeach
+                                    <template x-for="(image, index) in images" :key="index">
+                                        <button class="w-3 h-3 rounded-full transition duration-300"
+                                                :class="{'bg-white': currentIndex === index, 'bg-white bg-opacity-50 hover:bg-opacity-75': currentIndex !== index}"
+                                                @click="currentIndex = index"></button>
+                                    </template>
                                 </div>
                                 @endif
                             </div>
                             @if(count($house->images) > 1)
                             <div class="p-4 bg-gray-50">
                                 <div class="flex space-x-2 overflow-x-auto">
-                                    @foreach($house->images as $index => $image)
-                                    <img src="{{ Storage::url($image) }}" 
-                                         alt="{{ $house->name }} - Image {{ $index + 1 }}" 
-                                         class="w-20 h-16 object-cover rounded cursor-pointer hover:opacity-75 transition duration-300"
-                                         onclick="showImage({{ $index }})">
-                                    @endforeach
+                                    <template x-for="(image, index) in images" :key="index">
+                                        <img :src="image" 
+                                             :alt="'{{ $house->name }} - Image ' + (index + 1)"
+                                             class="w-20 h-16 object-cover rounded cursor-pointer hover:opacity-75 transition duration-300"
+                                             :class="{'border-2 border-indigo-500': currentIndex === index}"
+                                             @click="currentIndex = index">
+                                    </template>
                                 </div>
                             </div>
                             @endif
@@ -222,6 +228,7 @@
             </div>
         </div>
     </div>
+
     <!-- Image Gallery Modal pakai Alpine.js -->
     <div x-data="{ isOpen: false, currentImage: 0 }" 
          x-show="isOpen" 
@@ -234,9 +241,9 @@
             </button>
             <div class="relative">
                 @if($house->images && count($house->images) > 0)
-                    <template x-for="(image, index) in {{ json_encode($house->images) }}" :key="index">
+                    <template x-for="(image, index) in {{ json_encode(collect($house->images)->map(fn($img) => Storage::url($img))) }}" :key="index">
                         <div x-show="currentImage === index" class="flex items-center justify-center">
-                            <img :src="'{{ Storage::url('') }}' + image" 
+                            <img :src="image"
                                  :alt="'{{ $house->name }} - Image ' + (index + 1)"
                                  class="max-h-[80vh] w-auto">
                         </div>
@@ -255,10 +262,16 @@
             </div>
         </div>
     </div>
+
     @push('scripts')
     <script>
-        function showImage(index) {
-            window.dispatchEvent(new CustomEvent('show-gallery', { detail: { index } }));
+        function openGallery(index) {
+            const modal = document.querySelector('[x-data*="isOpen"]');
+            if (modal) {
+                const alpineInstance = modal.__x;
+                alpineInstance.isOpen = true;
+                alpineInstance.currentImage = index;
+            }
         }
     </script>
     @endpush

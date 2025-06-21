@@ -36,21 +36,26 @@
             <!-- Main Content -->
             <div class="lg:col-span-2">
                 <!-- Image Gallery -->
-                <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden mb-8" x-data="{ 
+                    images: {{ json_encode(collect($ruko->images)->map(fn($img) => Storage::url($img))) }},
+                    currentIndex: 0,
+                    get currentImage() { return this.images.length > 0 ? this.images[this.currentIndex] : '' }
+                }">
                     <div class="relative">
                         @if($ruko->images && count($ruko->images) > 0)
                             <div class="relative h-96">
-                                <img src="{{ Storage::url($ruko->images[0]) }}" 
+                                <img :src="currentImage" 
                                      alt="{{ $ruko->name }}" 
                                      class="w-full h-full object-cover">
                                 
                                 <!-- Image Navigation -->
                                 @if(count($ruko->images) > 1)
                                 <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                                    @foreach($ruko->images as $index => $image)
-                                    <button class="w-3 h-3 rounded-full bg-white bg-opacity-75 hover:bg-opacity-100 transition duration-300"
-                                            onclick="showImage({{ $index }})"></button>
-                                    @endforeach
+                                    <template x-for="(image, index) in images" :key="index">
+                                        <button class="w-3 h-3 rounded-full transition duration-300"
+                                                :class="{'bg-white': currentIndex === index, 'bg-white bg-opacity-50 hover:bg-opacity-75': currentIndex !== index}"
+                                                @click="currentIndex = index"></button>
+                                    </template>
                                 </div>
                                 @endif
                             </div>
@@ -59,12 +64,13 @@
                             @if(count($ruko->images) > 1)
                             <div class="p-4 bg-gray-50">
                                 <div class="flex space-x-2 overflow-x-auto">
-                                    @foreach($ruko->images as $index => $image)
-                                    <img src="{{ Storage::url($image) }}" 
-                                         alt="{{ $ruko->name }} - Image {{ $index + 1 }}" 
-                                         class="w-20 h-16 object-cover rounded cursor-pointer hover:opacity-75 transition duration-300"
-                                         onclick="showImage({{ $index }})">
-                                    @endforeach
+                                    <template x-for="(image, index) in images" :key="index">
+                                        <img :src="image" 
+                                             :alt="'{{ $ruko->name }} - Image ' + (index + 1)" 
+                                             class="w-20 h-16 object-cover rounded cursor-pointer hover:opacity-75 transition duration-300"
+                                             :class="{'border-2 border-indigo-500': currentIndex === index}"
+                                             @click="currentIndex = index">
+                                    </template>
                                 </div>
                             </div>
                             @endif
@@ -248,9 +254,8 @@
                             src="https://maps.google.com/maps?q={{ urlencode($ruko->address . ', ' . $ruko->city) }}&output=embed">
                         </iframe>
                     </div>
-                    <p class="text-gray-600 text-sm">
-                        <i class="fas fa-map-marker-alt text-indigo-600 mr-2"></i>
-                        {{ $ruko->address }}, {{ $ruko->city }}
+                    <p class="text-gray-600">
+                        <i class="fas fa-map-marker-alt mr-2"></i>{{ $ruko->address }}
                     </p>
                 </div> --}}
             </div>

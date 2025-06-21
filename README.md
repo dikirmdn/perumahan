@@ -9,6 +9,7 @@ Website Booking Rumah adalah aplikasi web yang dibangun menggunakan [Laravel](ht
 -   📝 Sistem pemesanan rumah online
 -   👥 Autentikasi pengguna (register, login, logout)
 -   🧑‍💼 Panel admin untuk mengelola data rumah dan pemesanan
+-   📋 Download laporan ke PDF
 
 ## 🛠️ Teknologi yang Digunakan
 

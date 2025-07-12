@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Daftar Rumah - CitraGarden')
+@section('title', 'Daftar Rumah - FindUrHouse')
 
 @section('content')
     <!-- Header Section -->

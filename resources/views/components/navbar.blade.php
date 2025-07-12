@@ -8,7 +8,7 @@
                         <div class="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center shadow-md group-hover:shadow-lg transition-all duration-300">
                             <i class="fas fa-home text-white text-xl"></i>
                         </div>
-                        <span class="text-2xl font-bold text-blue-600 group-hover:text-blue-700 transition-colors duration-300">CitraGarden</span>
+                        <span class="text-2xl font-bold text-blue-600 group-hover:text-blue-700 transition-colors duration-300">FindUrHouse</span>
                     </a>
                 </div>
                 

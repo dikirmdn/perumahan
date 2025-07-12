@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', $house->name . ' - CitraGarden')
+@section('title', $house->name . ' - FindUrHouse')
 
 @section('content')
     <!-- Breadcrumb -->
@@ -216,7 +216,7 @@
                             <i class="fas fa-user text-3xl text-indigo-600"></i>
                         </div>
                         <div>
-                            <p class="font-medium text-gray-900">Agen CitraGarden</p>
+                            <p class="font-medium text-gray-900">Agen FindUrHouse</p>
                             <p class="text-gray-500 text-sm">Professional Property Agent</p>
                             <p class="text-indigo-600 font-medium mt-1">
                                 <i class="fas fa-star text-yellow-400"></i>

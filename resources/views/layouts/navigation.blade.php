@@ -8,11 +8,11 @@
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
                     @if (auth()->user()->is_admin != 0)
                         <x-nav-link :href="route('dashboard')" :active="request()->routeIs('dashboard*')">
-                            Dashbor
+                            Dashboard
                         </x-nav-link>
                         
                         <x-nav-link :href="route('admin.houses.index')" :active="request()->routeIs('admin.houses*')">
-                            Rumah
+                            Houses
                         </x-nav-link>
                         
                         <x-nav-link :href="route('admin.bookings.index')" :active="request()->routeIs('admin.bookings*')">
@@ -20,11 +20,11 @@
                         </x-nav-link>
                         
                         <x-nav-link :href="route('home')">
-                            Beranda
+                            Home
                         </x-nav-link>
                     @else
                         <x-nav-link :href="route('home')">
-                            Beranda
+                            Home
                         </x-nav-link>
                     @endif
                 </div>
@@ -106,17 +106,17 @@
                     </x-responsive-nav-link>
                    
                     <x-responsive-nav-link :href="route('admin.houses.index')" :active="request()->routeIs('admin.houses*')">
-                      Rumah
+                      Houses
                     </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('admin.bookings.index')" :active="request()->routeIs('admin.bookings*')">
                       Booking
                     </x-responsive-nav-link>
                     <x-responsive-nav-link :href="route('profile.edit')">
-                      Profil
+                      Profile
                     </x-responsive-nav-link>
                 @else
                     <x-responsive-nav-link :href="route('home')">
-                      Beranda
+                      Home
                     </x-responsive-nav-link>
                 @endif
 

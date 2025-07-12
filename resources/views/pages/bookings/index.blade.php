@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Booking Saya - RumahSejahtera')
+@section('title', 'Booking Saya - FindUrHouse')
 
 @section('content')
     <!-- Header Section -->

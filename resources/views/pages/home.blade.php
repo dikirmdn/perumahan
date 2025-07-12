@@ -1,6 +1,6 @@
 @extends('layouts.main')
 
-@section('title', 'Beranda - CitraGarden')
+@section('title', 'Beranda - FindUrHouse')
 
 @section('content')
     <!-- Hero Section -->

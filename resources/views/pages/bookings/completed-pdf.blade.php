@@ -62,7 +62,7 @@
     </table>
 
     <div class="footer">
-        <p>Dokumen ini digenerate secara otomatis oleh sistem RumahSejahtera</p>
+        <p>Dokumen ini digenerate secara otomatis oleh sistem FindUrHouse</p>
     </div>
 </body>
 </html> 
